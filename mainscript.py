@@ -13,7 +13,7 @@ from datetime import datetime
 start_time=datetime.now()
 
 #%% Set Working Directory
-working_dir="C:/Users/chris.seaman/Desktop/Birth Dose Model Code Cleaning"
+working_dir= """Set your own working directory"""
 from os import chdir as set_wd
 set_wd(working_dir)
 
