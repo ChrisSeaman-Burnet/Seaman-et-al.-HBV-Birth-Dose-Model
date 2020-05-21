@@ -39,13 +39,12 @@ elif runs > 1:
 Tin=globz.iloc[1,1]
 t_steps,dt=time_steps(Tin,5)
 
-#Transforming timing paramaters if too few model iterations 
 if len(t_steps) < 400:
-    globz.loc[14, 1:]=1/dt                  #r_LA --> Latency to acute infection (3 weeks)
-    globz.loc[15, 1:]=1/dt                  #r_AC --> Acute to chronic infection (6 months)
-    globz.loc[17, 1:]=1/dt                  #r_AZ --> Acute to SVC (6 months)
+    globz.loc[14, 1:]=1/dt                
+    globz.loc[15, 1:]=1/dt                 
+    globz.loc[17, 1:]=1/dt                 
 elif len(t_steps) >=400 or len(t_steps)<2400:
-    globz.loc[14, 1:]=1/dt                  #r_LA --> Latency to acute infection (3 weeks)
+    globz.loc[14, 1:]=1/dt                  
 
 #Monte Carlo Simulations for Variables 
 if runs > 1:
