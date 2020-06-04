@@ -18,7 +18,7 @@ if region==1:
             regions_perturbed[reg,35,:]=hbv_pars.iloc[reg,45] #Cost of CTC vaccine in community
             regions_perturbed[reg,36,:]=hbv_pars.iloc[reg,46] #Cost of CPAD vaccine in community
         
-        # Remodelling baseline with fixed paramaters for comparison (ICER) - only needed when runs > 1
+        
         fac_cov_weighted, com_cov_weighted = facility_weight(runs, weight, hbv_pars, regions_perturbed)
         saturation, sat_costing=coverage_saturation(fac_cov_weighted, com_cov_weighted, hbv_pars, regions_perturbed,runs)
         scen=0
@@ -33,12 +33,12 @@ if region==1:
         baseline_opt=hbv_model(runs,t_steps,dt,model_init, hbv_pars, regions_perturbed, globz, globz_perturbed,discount)
     
             
-        # Collating data required for optimisation (formatting needs to be constant for runs==1 and runs >1; region==0 and region==1 )
+        
         baseline_expenditure=zeros((len(hbv_pars),1))
         for reg in range(len(hbv_pars)):
             baseline_expenditure[reg,0]=baseline_opt_vcost[reg,0,5]
             
-        #Series of one-dimensional arrays so can loop through 
+        
         hosp_n=zeros((len(hbv_pars)))
         for reg in range(len(hbv_pars)):
             hosp_n[reg]=hbv_pars.iloc[reg,14]*1000
@@ -368,7 +368,7 @@ elif region==0:
         for reg in range(len(hbv_pars)):
             baseline_expenditure[reg,0]=baseline_opt_vcost[reg,0,5]
             
-        #Series of one-dimensional arrays so can loop through 
+        
         hosp_n=zeros((len(hbv_pars)))
         for reg in range(len(hbv_pars)):
             hosp_n[reg]=hbv_pars.iloc[reg,14]*1000
