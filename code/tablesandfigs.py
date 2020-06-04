@@ -48,7 +48,7 @@ if region==1:
                 ce_modelling_results_daly[reg,run,6]=ce_modelling_results_daly[reg,run,6]-ce_modelling_results_daly[reg,run,5]
                 ce_modelling_results_daly[reg,run,7]=ce_modelling_results_daly[reg,run,7]-ce_modelling_results_daly[reg,run,5]
         
-        figure_2=zeros((len(hbv_pars), 6, 6))  # DALY median for scatter (0), error for error bars (1,2); diff_cost median for scatter (3), error for error bars (4,5) 
+        figure_2=zeros((len(hbv_pars), 6, 6))  
         
         for reg in range(len(hbv_pars)):
             #Cost-Effectiveness Modelling
@@ -150,7 +150,6 @@ if region==1:
         
         #Suplementary Table:
         
-        #Coverage (IQR), DALYs (IQR), Disease Cost (IQR), Vaccine Costs (IQR), ICER (IQR) - Needs to be calculated seperately (use ce_modelling_results)
         icer_ce_model=zeros((len(hbv_pars),6,runs))
         
         for reg in range(len(hbv_pars)):
@@ -286,7 +285,7 @@ if region==1:
     if runs > 1:
         
         #Figure 3 - Regional Optimization Bar Plot 
-        figure_3=zeros((len(hbv_pars),9,13))             #Include DALYs, ICER, so can export this as is and use for supplement table, and a column for sum cost
+        figure_3=zeros((len(hbv_pars),9,13))             
         
         for reg in range(len(hbv_pars)):
             
@@ -540,8 +539,8 @@ if region==0:
         plt.show()
         
         #####################################Supplementary Table 8#################################################################################
-        supp_table_8_bl=zeros((len(hbv_pars), 12))      #Total Cost, Each Intervention, DALYs (IQR), ICER (0's for baseline)
-        supp_table_8_90=zeros((len(hbv_pars), 12))      #Total Cost, Each Intervention, DALYS (IQR), ICER (Needs to be calculated)
+        supp_table_8_bl=zeros((len(hbv_pars), 12))      
+        supp_table_8_90=zeros((len(hbv_pars), 12))      
         
         for reg in range(len(hbv_pars)):
             
