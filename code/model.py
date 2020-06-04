@@ -27,7 +27,7 @@ def coverage_saturation(fac_cov_weighted, com_cov_weighted, hbv_pars, regions_pe
             
             saturation[reg,4]=0.95
            
-            if saturation[reg,2]>saturation[reg,3]:  #This can be modified so that additional coverage occurs in high coverage settings
+            if saturation[reg,2]>saturation[reg,3]:  
                 saturation[reg,3]=saturation[reg,2]+(1-saturation[reg,2])*0.1
                 saturation[reg,4]=saturation[reg,3]
             
@@ -58,7 +58,7 @@ def coverage_saturation(fac_cov_weighted, com_cov_weighted, hbv_pars, regions_pe
                 
                 saturation[reg,run,4]=0.95
                 
-                if saturation[reg,run,2]>saturation[reg,run,3]:         #This can be modified so that additional coverage occurs in high coverage settings
+                if saturation[reg,run,2]>saturation[reg,run,3]:         
                     saturation[reg,run,3]=saturation[reg,run,2]+(1-saturation[reg,run,2])*0.1
                     saturation[reg,run,4]=saturation[reg,run,3]
                 
@@ -372,7 +372,7 @@ def model_initializer(runs, globz, hbv_pars, globz_perturbed, regions_perturbed,
         
         model_init=zeros((len(hbv_pars)*runs, len(t_steps), 14))
         
-        #For simplicity, runs are in consecutive order and aggregated. Will split later on for results, tables and figures
+        
         for reg in range(len(hbv_pars)):
             for run in range(runs):
                 model_init[(runs*reg)+run, 0,0]=(P*hosp[reg,run,0]*hbv3[reg,run,0]*((prev[reg,run,0]*(hbe_prev[reg,run,0])*(1-hbe_pos[reg,run,0]))+(prev[reg,run,0]*hbe_prev[reg,run,0]*hbe_pos[reg,run,0]*(fac_cov[reg,run,0]))+(prev[reg,run,0]*(1-hbe_prev[reg,run,0])*(1-hbe_neg[reg,run,0]))+(prev[reg,run,0]*(1-hbe_prev[reg,run,0])*hbe_neg[reg,run,0]*fac_cov[reg,run,0])+(1-prev[reg,run,0])))+(P*comm[reg,run,0]*hbv3[reg,run,0]*((prev[reg,run,0]*hbe_prev[reg,run,0]*(1-hbe_pos[reg,run,0]))+(prev[reg,run,0]*hbe_prev[reg,run,0]*hbe_pos[reg,run,0]*com_cov[reg,run,0])+(prev[reg,run,0]*(1-hbe_prev[reg,run,0])*(1-hbe_neg[reg,run,0]))+(prev[reg,run,0]*(1-hbe_prev[reg,run,0])*hbe_neg[reg,run,0]*com_cov[reg,run,0])+(1-prev[reg,run,0]))) #Z
@@ -512,7 +512,7 @@ def hbv_model(runs,t_steps,dt,model_init, hbv_pars, regions_perturbed, globz, gl
         DALY_DC=globz.iloc[7,1]
         DALY_HCC=globz.iloc[8,1]
         
-        #Disease Cost (Setting Specific) #-7 is cost of HCC, -11 is cost of Acute
+        #Disease Cost (Setting Specific) 
         c_A=array(hbv_pars.iloc[:,37])
         c_C=array(hbv_pars.iloc[:,38])
         c_CC=array(hbv_pars.iloc[:,39])
@@ -543,7 +543,7 @@ def hbv_model(runs,t_steps,dt,model_init, hbv_pars, regions_perturbed, globz, gl
                 #9. Years Life Lost due to HBV (discounted 3% per annum)
                 model_init[reg, t+1, 9]=model_init[reg,t,9]+exp(-discount*(t*dt))*model_init[reg,t,8]*dt
                 #10. Years Lost to Disability from HBV (discounted 3% per annum)
-                model_init[reg, t+1, 10]=model_init[reg,t,10]+exp(-discount*(t*dt))*(DALY_A*model_init[reg,t,3]+DALY_C*model_init[reg,t,4]+DALY_CC*model_init[reg,t,5]+DALY_DC*model_init[reg,t,6]+DALY_HCC*model_init[reg,t,7])*(2997/len(t_steps))# normalizing factor, based on equivalent ODES as calculation is sensitive to step size
+                model_init[reg, t+1, 10]=model_init[reg,t,10]+exp(-discount*(t*dt))*(DALY_A*model_init[reg,t,3]+DALY_C*model_init[reg,t,4]+DALY_CC*model_init[reg,t,5]+DALY_DC*model_init[reg,t,6]+DALY_HCC*model_init[reg,t,7])*(2997/len(t_steps))# normalizing factor
                 #11. Cost of Disease (discounted 3% per annum)
                 model_init[reg, t+1, 11]=model_init[reg,t,11]+exp(-discount*(t*dt))*(c_A[reg]*model_init[reg,t,3]*dt+c_C[reg]*model_init[reg,t,4]*dt+c_CC[reg]*model_init[reg,t,5]*dt+c_DC[reg]*model_init[reg,t,6]*dt+c_HCC[reg]*model_init[reg,t,7]*dt)
                 #12. Total Cost (disease discounted 3% per annum, vaccine one off and not discounted)
@@ -636,7 +636,7 @@ def hbv_model(runs,t_steps,dt,model_init, hbv_pars, regions_perturbed, globz, gl
                     #9. Years Life Lost due to HBV (discounted 3% per annum)
                     model_init[(reg*runs)+run, t+1, 9]=model_init[(reg*runs)+run,t,9]+exp(-discount*(t*dt))*model_init[(reg*runs)+run,t,8]*dt
                     #10. Years Lost to Disability from HBV (discounted 3% per annum)
-                    model_init[(reg*runs)+run, t+1, 10]=model_init[(reg*runs)+run,t,10]+exp(-discount*(t*dt))*(DALY_A[run]*model_init[(reg*runs)+run,t,3]+DALY_C[run]*model_init[(reg*runs)+run,t,4]+DALY_CC[run]*model_init[(reg*runs)+run,t,5]+DALY_DC[run]*model_init[(reg*runs)+run,t,6]+DALY_HCC[run]*model_init[(reg*runs)+run,t,7])*(2997/len(t_steps))# normalizing factor, based on equivalent ODES as calculation is sensitive to step size
+                    model_init[(reg*runs)+run, t+1, 10]=model_init[(reg*runs)+run,t,10]+exp(-discount*(t*dt))*(DALY_A[run]*model_init[(reg*runs)+run,t,3]+DALY_C[run]*model_init[(reg*runs)+run,t,4]+DALY_CC[run]*model_init[(reg*runs)+run,t,5]+DALY_DC[run]*model_init[(reg*runs)+run,t,6]+DALY_HCC[run]*model_init[(reg*runs)+run,t,7])*(2997/len(t_steps)) #normalizing factor
                     #11. Cost of Disease (discounted 3% per annum)
                     model_init[(reg*runs)+run, t+1, 11]=model_init[(reg*runs)+run,t,11]+exp(-discount*(t*dt))*(c_A[reg,run,0]*model_init[(reg*runs)+run,t,3]*dt+c_C[reg,run,0]*model_init[(reg*runs)+run,t,4]*dt+c_CC[reg,run,0]*model_init[(reg*runs)+run,t,5]*dt+c_DC[reg,run,0]*model_init[(reg*runs)+run,t,6]*dt+c_HCC[reg,run,0]*model_init[(reg*runs)+run,t,7]*dt)
                     #12. Total Cost (disease discounted 3% per annum, vaccine one off and not discounted)
