@@ -3,7 +3,7 @@ Code and Data to reproduce analysis completed in the manuscript:
 
 <i>"Use of controlled temperature chain and compact prefilled
 auto-disable devices to reach 2030 hepatitis B birth dose
-vaccination targets in LMICs: a modelling and costoptimisation
+vaccination targets in LMICs: a modelling and cost optimisation
 study"</i>
 
 
